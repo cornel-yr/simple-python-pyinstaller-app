@@ -100,5 +100,6 @@ ENV/
 .mypy_cache/
 
 
-Proyek-1 .md
+Proyek-1.md
 default
+log.txt
