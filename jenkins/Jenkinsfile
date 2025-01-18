@@ -13,11 +13,6 @@ node {
     }
     stage('Manual Approval'){
         input message: 'Apakah Anda ingin melanjutkan ke tahap berikutnya?'
-        if (input == 'yes') {
-            echo 'Melanjutkan ke tahap berikutnya'
-        } else {
-            error 'Pengguna membatalkan proses'
-        }
     }
     stage('Deliver') {
         docker.image('cdrx/pyinstaller-linux:python2').inside {
