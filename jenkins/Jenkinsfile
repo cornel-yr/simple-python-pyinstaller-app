@@ -11,10 +11,16 @@ node {
         }
         junit 'test-reports/results.xml'
     }
+    stage('Manual Approval'){
+        input message: 'Apakah Anda ingin melanjutkan ke tahap berikutnya?'
+        if (input == 'yes') {
+            echo 'Melanjutkan ke tahap berikutnya'
+        } else {
+            error 'Pengguna membatalkan proses'
+        }
+    }
     stage('Deliver') {
         docker.image('cdrx/pyinstaller-linux:python2').inside {
-            sh 'ls -la'  // Debug: List files in the current directory
-            sh 'ls -la sources'  // Debug: List files in the sources directory
             sh 'pyinstaller --onefile sources/add2vals.py'
             input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)' 
             sh 'echo "Selesai!"'
